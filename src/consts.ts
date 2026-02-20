@@ -35,7 +35,7 @@ export type ThemeMode = 'light' | 'dark';
  * 当前主题模式
  * 用户可在配置文件中选择浅色或暗色主题
  */
-export const THEME_MODE: ThemeMode = 'dark';
+export const THEME_MODE: ThemeMode = 'light';
 
 // ========================================
 // 首页区块配置
