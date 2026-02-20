@@ -1,0 +1,82 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import PostStyles from '../styles/PostStyles.astro';
+import ScrollReveal from '../styles/ScrollReveal.astro';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, date, updatedDate, heroImage } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+
+const updatedDateFormatted = updatedDate?.toLocaleDateString('en-US', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
+	<body>
+		<Header />
+		<main class="post-main">
+			<article class="post-container">
+				<header class="post-header scroll-reveal">
+					<div class="post-meta">
+						<time class="post-date">{formattedDate}</time>
+					</div>
+					<h1 class="post-title">{title}</h1>
+					{description && <p class="post-description">{description}</p>}
+					{updatedDate && (
+						<p class="post-updated">Updated on {updatedDateFormatted}</p>
+					)}
+				</header>
+
+				{heroImage && (
+					<div class="post-hero scroll-reveal" data-delay="1">
+						<Image width={1020} height={510} src={heroImage} alt={title} />
+					</div>
+				)}
+
+				<div class="post-content scroll-reveal" data-delay="2">
+					<slot />
+				</div>
+			</article>
+		</main>
+		<Footer />
+		<PostStyles />
+		<ScrollReveal />
+		<script>
+			document.querySelectorAll('[data-copy]').forEach((btn) => {
+				btn.addEventListener('click', async () => {
+					const wrapper = btn.closest('.code-block-wrapper');
+					const codeEl = wrapper?.querySelector('code');
+					const code = codeEl?.textContent || '';
+					
+					try {
+						await navigator.clipboard.writeText(code);
+						btn.classList.add('copied');
+						(btn as HTMLButtonElement).textContent = 'Copied';
+						setTimeout(() => {
+							btn.classList.remove('copied');
+							(btn as HTMLButtonElement).textContent = 'Copy';
+						}, 2000);
+					} catch (err) {
+						console.error('Failed to copy:', err);
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

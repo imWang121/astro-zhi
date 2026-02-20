@@ -1,0 +1,171 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import AboutStyles from '../styles/AboutStyles.astro';
+import ScrollReveal from '../styles/ScrollReveal.astro';
+import { SITE_TITLE, GITHUB_REPO, INTRO } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`关于 | ${SITE_TITLE}`} description="关于主题" />
+	</head>
+	<body>
+		<Header />
+		<AboutStyles />
+		<main class="about-page">
+			<div class="about-container">
+				<section class="about-hero scroll-reveal">
+					<div class="hero-label">About</div>
+					<h1 class="hero-name">{INTRO.name}</h1>
+					<p class="hero-tagline">纸，极简单栏博客主题</p>
+				</section>
+
+				<section class="about-section scroll-reveal" data-delay="1">
+					<h2 class="section-title">简介</h2>
+					<div class="story-content">
+						<p>
+							{SITE_TITLE} 是一个极简单栏博客主题：干净、快速、为阅读而设计。
+						</p>
+						<p>
+							内容以 Markdown 写作，支持暗色模式、代码高亮、RSS 与沉浸式阅读，适合作为个人写作与轻量内容发布的起点。
+						</p>
+						<p>
+							主题已开源维护，如果你有改进建议或想一起完善，欢迎<a href={GITHUB_REPO + '/issues'} target="_blank" rel="noopener noreferrer">创建 Issue</a>交流。
+						</p>
+					</div>
+				</section>
+
+				<section class="about-section scroll-reveal" data-delay="2">
+					<h2 class="section-title">技术栈</h2>
+					<div class="tech-stack">
+						<div class="tech-item">
+							<span class="tech-name">Astro</span>
+							<span class="tech-desc">静态站点生成器</span>
+						</div>
+						<div class="tech-item">
+							<span class="tech-name">TypeScript</span>
+							<span class="tech-desc">类型安全</span>
+						</div>
+						<div class="tech-item">
+							<span class="tech-name">Markdown/MDX</span>
+							<span class="tech-desc">内容写作</span>
+						</div>
+						<div class="tech-item">
+							<span class="tech-name">Prism</span>
+							<span class="tech-desc">代码高亮</span>
+						</div>
+						<div class="tech-item">
+							<span class="tech-name">Sharp</span>
+							<span class="tech-desc">图片优化</span>
+						</div>
+					</div>
+				</section>
+
+				<section class="about-section scroll-reveal" data-delay="3">
+					<h2 class="section-title">常见问题</h2>
+					<div class="faq-list">
+						<div class="faq-item">
+							<button class="faq-question" aria-expanded="false">
+								<span class="faq-toggle">
+									<svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+										<path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+								</span>
+								<span class="faq-question-text">如何创建新文章？</span>
+							</button>
+							<div class="faq-answer">在 <code>src/content/blog/</code> 目录下创建 <code>.md</code> 或 <code>.mdx</code> 文件，填写 frontmatter 字段即可。</div>
+						</div>
+						<div class="faq-item">
+							<button class="faq-question" aria-expanded="false">
+								<span class="faq-toggle">
+									<svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+										<path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+								</span>
+								<span class="faq-question-text">文章支持哪些字段？</span>
+							</button>
+							<div class="faq-answer">支持 title、description、date、updatedDate、heroImage、draft、abbrlink、badge、tags、archive 等字段，详见<a href="/blog/article-fields/">文章字段说明</a>。</div>
+						</div>
+						<div class="faq-item">
+							<button class="faq-question" aria-expanded="false">
+								<span class="faq-toggle">
+									<svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+										<path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+								</span>
+								<span class="faq-question-text">如何隐藏文章？</span>
+							</button>
+							<div class="faq-answer">设置 <code>draft: true</code> 可完全隐藏文章；设置 <code>archive: false</code> 可在归档页面隐藏。</div>
+						</div>
+						<div class="faq-item">
+							<button class="faq-question" aria-expanded="false">
+								<span class="faq-toggle">
+									<svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+										<path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+								</span>
+								<span class="faq-question-text">如何部署博客？</span>
+							</button>
+							<div class="faq-answer">支持 Vercel、Netlify、Cloudflare Pages、GitHub Pages 等平台，连接 GitHub 仓库即可自动部署。</div>
+						</div>
+						<div class="faq-item">
+							<button class="faq-question" aria-expanded="false">
+								<span class="faq-toggle">
+									<svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+										<path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+								</span>
+								<span class="faq-question-text">如何自定义主题？</span>
+							</button>
+							<div class="faq-answer">修改 <code>src/styles/</code> 目录下的样式文件，或在 <code>src/consts.ts</code> 中修改站点配置。</div>
+						</div>
+						<div class="faq-item">
+							<button class="faq-question" aria-expanded="false">
+								<span class="faq-toggle">
+									<svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+										<path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+								</span>
+								<span class="faq-question-text">支持哪些 Markdown 扩展语法？</span>
+							</button>
+							<div class="faq-answer">支持提示框（note/tip/info/warning）、Pullquote、图片灯箱、多图排版等扩展语法。</div>
+						</div>
+						<div class="faq-item">
+							<button class="faq-question" aria-expanded="false">
+								<span class="faq-toggle">
+									<svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+										<path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+								</span>
+								<span class="faq-question-text">部署失败怎么办？</span>
+							</button>
+							<div class="faq-answer">常见原因：1. Node.js 版本过低，建议使用 Node 18+；2. 依赖安装失败，尝试删除 <code>node_modules</code> 和 <code>package-lock.json</code> 后重新安装；3. 环境变量未设置，部署时需配置 <code>SITE_URL</code>；4. 构建命令错误，确保使用 <code>npm run build</code>，输出目录为 <code>dist</code>。</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="about-section about-quote scroll-reveal" data-delay="4">
+					<blockquote>
+						<p>Stay passionate, keep making progress.</p>
+					</blockquote>
+				</section>
+			</div>
+		</main>
+		<Footer />
+		<ScrollReveal />
+		<script>
+			document.querySelectorAll('.faq-question').forEach(question => {
+				question.addEventListener('click', () => {
+					const item = question.closest('.faq-item');
+					const isExpanded = question.getAttribute('aria-expanded') === 'true';
+					
+					question.setAttribute('aria-expanded', (!isExpanded).toString());
+					item?.classList.toggle('expanded', !isExpanded);
+				});
+			});
+		</script>
+	</body>
+</html>

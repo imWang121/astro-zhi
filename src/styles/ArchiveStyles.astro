@@ -1,0 +1,283 @@
+<style is:global>
+	main {
+		display: flex;
+		flex-direction: column;
+		padding: 0 1rem;
+	}
+
+	.archive-container {
+		max-width: 700px;
+		width: 100%;
+		margin: 0 auto;
+		padding: 2rem 0 5rem;
+	}
+
+	/* ========================================
+	   Header
+	   ======================================== */
+	.archive-header {
+		margin-bottom: 3rem;
+	}
+
+	.archive-label {
+		display: block;
+		font-family: var(--font-serif);
+		font-size: 0.75rem;
+		color: var(--color-gray-400);
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
+		margin-bottom: 0.5rem;
+	}
+
+	.archive-title {
+		font-family: var(--font-serif);
+		font-size: 3rem;
+		font-weight: 500;
+		color: var(--color-black);
+		margin: 0 0 0.5rem 0;
+		line-height: 1;
+		letter-spacing: -0.03em;
+	}
+
+	.archive-stats {
+		font-family: var(--font-sans-serif);
+		font-size: 0.875rem;
+		color: var(--color-gray-500);
+		margin: 0;
+	}
+
+	/* ========================================
+	   Tags
+	   ======================================== */
+	.archive-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-bottom: 4rem;
+		padding-bottom: 3rem;
+		border-bottom: 1px solid var(--color-gray-100);
+	}
+
+	.tag-chip {
+		display: inline-flex;
+		align-items: baseline;
+		gap: 0.25rem;
+		padding: 0.5rem 1rem;
+		background: var(--color-gray-50);
+		border-radius: 2px;
+		font-family: var(--font-serif);
+		font-size: 0.875rem;
+		color: var(--color-gray-600);
+		transition: all 0.2s ease;
+	}
+
+	.tag-chip:hover {
+		background: var(--color-gray-100);
+		color: var(--color-gray-800);
+	}
+
+	.tag-sup {
+		font-family: var(--font-sans-serif);
+		font-size: 0.625rem;
+		font-weight: 500;
+		color: var(--color-gray-400);
+		margin-left: 0.125rem;
+	}
+
+	/* ========================================
+	   Timeline
+	   ======================================== */
+	.archive-timeline {
+		position: relative;
+	}
+
+	.timeline-year {
+		position: relative;
+		margin-bottom: 3rem;
+	}
+
+	.timeline-year:last-child {
+		margin-bottom: 0;
+	}
+
+	.year-marker {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		width: 100%;
+		padding: 0;
+		margin-bottom: 1.5rem;
+		background: none;
+		border: none;
+		cursor: pointer;
+		text-align: left;
+		font-family: inherit;
+	}
+
+	.year-marker:hover .year-label {
+		color: var(--color-gray-700);
+	}
+
+	.year-marker:focus {
+		outline: none;
+	}
+
+	.year-marker:focus-visible .year-label {
+		text-decoration: underline;
+		text-decoration-color: var(--color-gray-400);
+		text-underline-offset: 2px;
+	}
+
+	.year-toggle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 1.25rem;
+		height: 1.25rem;
+		color: var(--color-gray-400);
+		transition: transform 0.25s ease;
+	}
+
+	.year-toggle svg {
+		display: block;
+	}
+
+	.timeline-year.collapsed .year-toggle {
+		transform: rotate(-90deg);
+	}
+
+	.year-label {
+		font-family: var(--font-serif);
+		font-size: 1.5rem;
+		font-weight: 600;
+		color: var(--color-black);
+		letter-spacing: -0.02em;
+		transition: color 0.2s ease;
+	}
+
+	.year-bar {
+		flex: 1;
+		height: 1px;
+		background: var(--color-gray-200);
+	}
+
+	.year-count {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		color: var(--color-gray-400);
+	}
+
+	.year-entries {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+		padding-left: 2rem;
+		overflow: hidden;
+		max-height: 2000px;
+		transition: max-height 0.4s ease, opacity 0.3s ease;
+	}
+
+	.timeline-year.collapsed .year-entries {
+		max-height: 0;
+		opacity: 0;
+	}
+
+	.entry {
+		display: grid;
+		grid-template-columns: 3.5rem 1fr auto;
+		align-items: baseline;
+		gap: 1.5rem;
+		padding: 1rem 0;
+		text-decoration: none;
+		border-bottom: 1px solid var(--color-gray-50);
+		transition: all 0.2s ease;
+	}
+
+	.entry:last-child {
+		border-bottom: none;
+	}
+
+	.entry:hover {
+		padding-left: 0.5rem;
+		background: linear-gradient(to right, var(--color-gray-50), transparent);
+	}
+
+	.entry:hover .entry-title {
+		color: var(--color-black);
+	}
+
+	.entry-date {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		color: var(--color-gray-400);
+		letter-spacing: 0.02em;
+	}
+
+	.entry-title {
+		font-family: var(--font-serif);
+		font-size: 1rem;
+		color: var(--color-gray-700);
+		line-height: 1.5;
+		transition: color 0.2s ease;
+	}
+
+	.entry-badge {
+		font-family: var(--font-sans-serif);
+		font-size: 0.6875rem;
+		font-weight: 500;
+		color: var(--color-gray-500);
+		background: var(--color-gray-100);
+		padding: 0.25rem 0.625rem;
+		border-radius: 2px;
+		white-space: nowrap;
+	}
+
+	/* ========================================
+	   Responsive
+	   ======================================== */
+	@media (max-width: 768px) {
+		main {
+			padding: 0 1.5rem;
+		}
+
+		.archive-container {
+			padding: 2rem 0 4rem;
+		}
+
+		.archive-title {
+			font-size: 2.5rem;
+		}
+
+		.archive-tags {
+			margin-bottom: 3rem;
+			padding-bottom: 2rem;
+		}
+
+		.tag-chip {
+			padding: 0.375rem 0.75rem;
+			font-size: 0.8125rem;
+		}
+
+		.year-label {
+			font-size: 1.25rem;
+		}
+
+		.year-entries {
+			padding-left: 1.5rem;
+		}
+
+		.entry {
+			grid-template-columns: 2.75rem 1fr;
+			gap: 1rem;
+			padding: 0.875rem 0;
+		}
+
+		.entry-badge {
+			display: none;
+		}
+
+		.entry-title {
+			font-size: 0.9375rem;
+		}
+	}
+</style>

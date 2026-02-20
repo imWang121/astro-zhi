@@ -1,0 +1,799 @@
+---
+/**
+ * 暗色主题样式
+ * 当 THEME_MODE 为 'dark' 时应用
+ */
+---
+
+<style is:global>
+	/* 暗色模式变量 */
+	:root[data-theme="dark"] {
+		--color-white: #0d1117;
+		--color-gray-50: #161b22;
+		--color-gray-100: #21262d;
+		--color-gray-200: #30363d;
+		--color-gray-300: #484f58;
+		--color-gray-400: #6e7681;
+		--color-gray-500: #8b949e;
+		--color-gray-600: #b1bac4;
+		--color-gray-700: #c9d1d9;
+		--color-gray-800: #e6edf3;
+		--color-gray-900: #f0f6fc;
+		--color-black: #ffffff;
+	}
+
+	/* 暗色模式基础样式 */
+	:root[data-theme="dark"] body {
+		color: var(--color-gray-700);
+		background-color: #0d1117;
+	}
+
+	:root[data-theme="dark"] a {
+		color: var(--color-gray-700);
+	}
+
+	:root[data-theme="dark"] a:hover {
+		color: var(--color-gray-900);
+	}
+
+	/* 暗色模式选中样式 */
+	:root[data-theme="dark"] ::selection {
+		background-color: #264f78;
+		color: #f0f6fc;
+	}
+
+	:root[data-theme="dark"] ::-moz-selection {
+		background-color: #264f78;
+		color: #f0f6fc;
+	}
+
+	/* 暗色模式滚动条 */
+	:root[data-theme="dark"] ::-webkit-scrollbar-track {
+		background: var(--color-gray-100);
+	}
+
+	:root[data-theme="dark"] ::-webkit-scrollbar-thumb {
+		background: var(--color-gray-400);
+	}
+
+	:root[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+		background: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] ::-webkit-scrollbar-corner {
+		background: var(--color-gray-100);
+	}
+
+	:root[data-theme="dark"] * {
+		scrollbar-color: var(--color-gray-400) var(--color-gray-100);
+	}
+
+	/* ========================================
+	   Header
+	   ======================================== */
+	:root[data-theme="dark"] .header-logo {
+		color: #f0f6fc;
+	}
+
+	:root[data-theme="dark"] .header-divider {
+		color: var(--color-gray-400);
+	}
+
+	:root[data-theme="dark"] .header-link {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .header-link:hover {
+		color: var(--color-gray-900);
+	}
+
+	:root[data-theme="dark"] .nav-divider {
+		color: var(--color-gray-400);
+	}
+
+	/* ========================================
+	   Footer
+	   ======================================== */
+	:root[data-theme="dark"] .footer-info {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .footer-link {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .footer-link:hover {
+		color: var(--color-gray-700);
+	}
+
+	:root[data-theme="dark"] .footer-divider {
+		color: var(--color-gray-400);
+	}
+
+	/* ========================================
+	   首页 - 个人介绍
+	   ======================================== */
+	:root[data-theme="dark"] .intro-label {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .intro-name {
+		color: var(--color-gray-900);
+	}
+
+	:root[data-theme="dark"] .intro-tagline {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .intro-caption {
+		color: var(--color-gray-500);
+	}
+
+	/* ========================================
+	   首页 - 关于我
+	   ======================================== */
+	:root[data-theme="dark"] .home-about p {
+		color: var(--color-gray-600);
+	}
+
+	:root[data-theme="dark"] .home-about a {
+		color: var(--color-gray-700);
+	}
+
+	:root[data-theme="dark"] .home-about a:hover {
+		color: var(--color-gray-900);
+	}
+
+	:root[data-theme="dark"] .home-about .note {
+		color: var(--color-gray-500);
+	}
+
+	/* ========================================
+	   首页 - 联系方式
+	   ======================================== */
+	:root[data-theme="dark"] .contact-label-title {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .contact-link {
+		background: var(--color-gray-100);
+	}
+
+	:root[data-theme="dark"] .contact-link:hover {
+		background: var(--color-gray-200);
+	}
+
+	:root[data-theme="dark"] .contact-icon {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .contact-label {
+		color: var(--color-gray-600);
+	}
+
+	/* ========================================
+	   首页 - 最近文章
+	   ======================================== */
+	:root[data-theme="dark"] .posts-label {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .posts-more {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .posts-more:hover {
+		color: var(--color-gray-900);
+	}
+
+	/* ========================================
+	   首页 - 项目
+	   ======================================== */
+	:root[data-theme="dark"] .projects-label {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .project-card {
+		background-color: var(--color-gray-100);
+	}
+
+	:root[data-theme="dark"] .project-name {
+		color: var(--color-gray-900);
+	}
+
+	:root[data-theme="dark"] .project-description {
+		color: var(--color-gray-500);
+	}
+
+	/* ========================================
+	   文章列表页
+	   ======================================== */
+	:root[data-theme="dark"] .blog-title {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .blog-subtitle {
+		color: var(--color-gray-900);
+	}
+
+	:root[data-theme="dark"] .blog-stats {
+		border-bottom-color: var(--color-gray-200);
+	}
+
+	:root[data-theme="dark"] .blog-stat-icon {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .blog-stat-value {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .blog-year-title {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .blog-post-item {
+		border-bottom-color: var(--color-gray-200);
+	}
+
+	:root[data-theme="dark"] .blog-post-title {
+		color: var(--color-gray-800);
+	}
+
+	:root[data-theme="dark"] .blog-post-title:hover {
+		color: var(--color-gray-900);
+	}
+
+	:root[data-theme="dark"] .blog-post-description {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .blog-post-date {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .blog-post-badge {
+		background-color: var(--color-gray-200);
+		color: var(--color-gray-600);
+	}
+
+	/* ========================================
+	   文章详情页 - 头部
+	   ======================================== */
+	:root[data-theme="dark"] .post-title {
+		color: var(--color-gray-900);
+	}
+
+	:root[data-theme="dark"] .post-description {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .post-date {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .post-reading-time {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .post-updated {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .post-hero {
+		border-color: var(--color-gray-200);
+	}
+
+	/* ========================================
+	   文章详情页 - 内容基础
+	   ======================================== */
+	:root[data-theme="dark"] .post-content {
+		color: var(--color-gray-700);
+	}
+
+	/* ========================================
+	   文章详情页 - 标题
+	   ======================================== */
+	:root[data-theme="dark"] .post-content h1,
+	:root[data-theme="dark"] .post-content h2,
+	:root[data-theme="dark"] .post-content h3,
+	:root[data-theme="dark"] .post-content h4,
+	:root[data-theme="dark"] .post-content h5,
+	:root[data-theme="dark"] .post-content h6 {
+		color: var(--color-gray-900);
+	}
+
+	:root[data-theme="dark"] .post-content h1 {
+		border-bottom-color: var(--color-gray-200);
+	}
+
+	:root[data-theme="dark"] .post-content h2 {
+		border-left-color: var(--color-gray-900);
+	}
+
+	:root[data-theme="dark"] .post-content h4 {
+		color: var(--color-gray-700);
+	}
+
+	:root[data-theme="dark"] .post-content h5 {
+		color: var(--color-gray-600);
+	}
+
+	:root[data-theme="dark"] .post-content h6 {
+		color: var(--color-gray-500);
+	}
+
+	/* ========================================
+	   文章详情页 - 链接
+	   ======================================== */
+	:root[data-theme="dark"] .post-content a {
+		color: var(--color-gray-900);
+		text-decoration-color: var(--color-gray-400);
+	}
+
+	:root[data-theme="dark"] .post-content a:hover {
+		text-decoration-color: var(--color-gray-900);
+	}
+
+	/* ========================================
+	   文章详情页 - 列表
+	   ======================================== */
+	:root[data-theme="dark"] .post-content ul > li::before {
+		background: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .post-content ol > li::before {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .post-content li ul > li::before {
+		background: var(--color-gray-400);
+	}
+
+	/* ========================================
+	   文章详情页 - 引用
+	   ======================================== */
+	:root[data-theme="dark"] .post-content blockquote {
+		background: var(--color-gray-100);
+		border-left-color: var(--color-gray-400);
+		color: var(--color-gray-500);
+	}
+
+	/* ========================================
+	   文章详情页 - Pullquote
+	   ======================================== */
+	:root[data-theme="dark"] .post-content blockquote.pullquote p:first-child {
+		color: var(--color-gray-700);
+	}
+
+	:root[data-theme="dark"] .post-content blockquote.pullquote p:first-child::before {
+		background: var(--color-gray-400);
+	}
+
+	:root[data-theme="dark"] .post-content blockquote.pullquote p + p {
+		color: var(--color-gray-500);
+	}
+
+	/* ========================================
+	   文章详情页 - Callout
+	   ======================================== */
+	:root[data-theme="dark"] .post-content .callout {
+		background: var(--color-gray-100);
+		border-color: var(--color-gray-200);
+	}
+
+	:root[data-theme="dark"] .post-content .callout > p:first-child::before {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .post-content .callout .callout-title {
+		color: var(--color-gray-800);
+		border-bottom-color: var(--color-gray-400);
+	}
+
+	:root[data-theme="dark"] .post-content .callout .callout-title::before {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .post-content .callout.warning .callout-title {
+		border-bottom-color: #f59e0b;
+	}
+
+	:root[data-theme="dark"] .post-content .callout.success .callout-title {
+		border-bottom-color: #10b981;
+	}
+
+	:root[data-theme="dark"] .post-content .callout.error .callout-title {
+		border-bottom-color: #ef4444;
+	}
+
+	:root[data-theme="dark"] .post-content .callout.tip .callout-title {
+		border-bottom-color: #8b5cf6;
+	}
+
+	/* ========================================
+	   文章详情页 - 代码
+	   ======================================== */
+	:root[data-theme="dark"] .post-content code {
+		background: var(--color-gray-100);
+		color: var(--color-gray-700);
+	}
+
+	:root[data-theme="dark"] .post-content .code-block-wrapper {
+		background: var(--color-gray-100);
+		border-color: var(--color-gray-200);
+	}
+
+	:root[data-theme="dark"] .post-content .code-block-wrapper .code-header {
+		background: var(--color-gray-200);
+		border-bottom-color: var(--color-gray-300);
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .post-content .code-block-wrapper .code-lang {
+		color: var(--color-gray-600);
+	}
+
+	:root[data-theme="dark"] .post-content .code-block-wrapper .code-meta {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .post-content .code-block-wrapper .code-copy {
+		border-color: var(--color-gray-400);
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .post-content .code-block-wrapper .code-copy:hover {
+		background: var(--color-gray-200);
+		border-color: var(--color-gray-500);
+		color: var(--color-gray-700);
+	}
+
+	:root[data-theme="dark"] .post-content .code-block-wrapper .code-copy.copied {
+		background: var(--color-gray-600);
+		border-color: var(--color-gray-600);
+		color: var(--color-gray-100);
+	}
+
+	:root[data-theme="dark"] .post-content .code-block-wrapper code {
+		color: var(--color-gray-600);
+	}
+
+	:root[data-theme="dark"] .post-content pre {
+		background: var(--color-gray-100);
+		border-color: var(--color-gray-200);
+	}
+
+	:root[data-theme="dark"] .post-content pre code {
+		color: var(--color-gray-600);
+	}
+
+	/* ========================================
+	   文章详情页 - 图片
+	   ======================================== */
+	:root[data-theme="dark"] .post-content img {
+		border-color: var(--color-gray-200);
+	}
+
+	:root[data-theme="dark"] .post-content figcaption {
+		color: var(--color-gray-500);
+	}
+
+	/* ========================================
+	   文章详情页 - 分隔线
+	   ======================================== */
+	:root[data-theme="dark"] .post-content hr {
+		background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12'%3E%3Cpath d='M0 6 Q15 0 30 6 T60 6 T90 6 T120 6' stroke='%2330363d' stroke-width='1' fill='none'/%3E%3C/svg%3E") repeat-x center;
+	}
+
+	/* ========================================
+	   文章详情页 - 表格
+	   ======================================== */
+	:root[data-theme="dark"] .post-content table {
+		border-color: var(--color-gray-200);
+	}
+
+	:root[data-theme="dark"] .post-content thead {
+		background: var(--color-gray-100);
+		border-bottom-color: var(--color-gray-200);
+	}
+
+	:root[data-theme="dark"] .post-content th {
+		color: var(--color-gray-600);
+	}
+
+	:root[data-theme="dark"] .post-content td {
+		border-bottom-color: var(--color-gray-200);
+		color: var(--color-gray-600);
+	}
+
+	:root[data-theme="dark"] .post-content tbody tr:hover {
+		background: var(--color-gray-100);
+	}
+
+	/* ========================================
+	   文章详情页 - 其他
+	   ======================================== */
+	:root[data-theme="dark"] .post-content del {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .post-content strong {
+		color: var(--color-gray-900);
+	}
+
+	:root[data-theme="dark"] .post-content em {
+		color: var(--color-gray-700);
+	}
+
+	:root[data-theme="dark"] .post-content mark {
+		background: #6e7681;
+		color: var(--color-gray-900);
+	}
+
+	:root[data-theme="dark"] .post-content kbd {
+		background: var(--color-gray-100);
+		border-color: var(--color-gray-300);
+		color: var(--color-gray-600);
+	}
+
+	:root[data-theme="dark"] .post-content dt {
+		color: var(--color-gray-900);
+	}
+
+	:root[data-theme="dark"] .post-content dd {
+		color: var(--color-gray-500);
+	}
+
+	/* ========================================
+	   文章详情页 - 任务列表
+	   ======================================== */
+	:root[data-theme="dark"] .post-content input[type='checkbox'] {
+		border-color: var(--color-gray-400);
+	}
+
+	:root[data-theme="dark"] .post-content input[type='checkbox']:checked {
+		background: var(--color-gray-600);
+		border-color: var(--color-gray-600);
+	}
+
+	/* ========================================
+	   文章详情页 - 脚注
+	   ======================================== */
+	:root[data-theme="dark"] .post-content .footnotes {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .post-content sup > a {
+		background: var(--color-gray-200);
+	}
+
+	/* ========================================
+	   文章详情页 - 底部导航
+	   ======================================== */
+	:root[data-theme="dark"] .post-footer {
+		border-top-color: var(--color-gray-200);
+	}
+
+	:root[data-theme="dark"] .post-nav-item {
+		background: var(--color-gray-100);
+		border-color: var(--color-gray-200);
+	}
+
+	:root[data-theme="dark"] .post-nav-item:hover {
+		background: var(--color-gray-200);
+		border-color: var(--color-gray-300);
+	}
+
+	:root[data-theme="dark"] .post-nav-label {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .post-nav-title {
+		color: var(--color-gray-900);
+	}
+
+	/* ========================================
+	   归档页 - 头部
+	   ======================================== */
+	:root[data-theme="dark"] .archive-label {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .archive-title {
+		color: var(--color-gray-900);
+	}
+
+	:root[data-theme="dark"] .archive-stats {
+		color: var(--color-gray-500);
+	}
+
+	/* ========================================
+	   归档页 - 标签
+	   ======================================== */
+	:root[data-theme="dark"] .archive-tags {
+		border-bottom-color: var(--color-gray-200);
+	}
+
+	:root[data-theme="dark"] .tag-chip {
+		background: var(--color-gray-100);
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .tag-chip:hover {
+		background: var(--color-gray-200);
+		color: var(--color-gray-700);
+	}
+
+	:root[data-theme="dark"] .tag-sup {
+		color: var(--color-gray-500);
+	}
+
+	/* ========================================
+	   归档页 - 时间线
+	   ======================================== */
+	:root[data-theme="dark"] .year-header {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .year-toggle {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .year-toggle:hover {
+		color: var(--color-gray-700);
+	}
+
+	:root[data-theme="dark"] .timeline-line {
+		background-color: var(--color-gray-200);
+	}
+
+	:root[data-theme="dark"] .timeline-dot {
+		background-color: var(--color-gray-400);
+	}
+
+	:root[data-theme="dark"] .archive-post-title {
+		color: var(--color-gray-800);
+	}
+
+	:root[data-theme="dark"] .archive-post-title:hover {
+		color: var(--color-gray-900);
+	}
+
+	:root[data-theme="dark"] .archive-post-date {
+		color: var(--color-gray-500);
+	}
+
+	/* ========================================
+	   关于页 - 头部
+	   ======================================== */
+	:root[data-theme="dark"] .hero-label {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .hero-name {
+		color: var(--color-gray-900);
+	}
+
+	:root[data-theme="dark"] .hero-tagline {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .about-hero {
+		border-bottom-color: var(--color-gray-200);
+	}
+
+	/* ========================================
+	   关于页 - 区块标题
+	   ======================================== */
+	:root[data-theme="dark"] .section-title {
+		color: var(--color-gray-500);
+	}
+
+	/* ========================================
+	   关于页 - 故事内容
+	   ======================================== */
+	:root[data-theme="dark"] .story-content p {
+		color: var(--color-gray-600);
+	}
+
+	:root[data-theme="dark"] .story-content a {
+		color: var(--color-gray-700);
+	}
+
+	:root[data-theme="dark"] .story-content a:hover {
+		color: var(--color-gray-900);
+	}
+
+	/* ========================================
+	   关于页 - 技术栈
+	   ======================================== */
+	:root[data-theme="dark"] .tech-tag {
+		background: var(--color-gray-100);
+		color: var(--color-gray-500);
+	}
+
+	/* ========================================
+	   关于页 - FAQ
+	   ======================================== */
+	:root[data-theme="dark"] .faq-item {
+		border-bottom-color: var(--color-gray-200);
+	}
+
+	:root[data-theme="dark"] .faq-question {
+		color: var(--color-gray-800);
+	}
+
+	:root[data-theme="dark"] .faq-icon {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .faq-answer {
+		color: var(--color-gray-600);
+	}
+
+	/* ========================================
+	   关于页 - 联系方式
+	   ======================================== */
+	:root[data-theme="dark"] .contact-section a {
+		color: var(--color-gray-700);
+	}
+
+	:root[data-theme="dark"] .contact-section a:hover {
+		color: var(--color-gray-900);
+	}
+
+	/* ========================================
+	   弹窗
+	   ======================================== */
+	:root[data-theme="dark"] .modal-overlay {
+		background-color: rgba(0, 0, 0, 0.85);
+	}
+
+	:root[data-theme="dark"] .modal-content {
+		background-color: var(--color-gray-100);
+	}
+
+	:root[data-theme="dark"] .modal-description {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .modal-number-label {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .modal-number-value {
+		color: var(--color-gray-800);
+	}
+
+	:root[data-theme="dark"] .modal-qr-hint {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .modal-close {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .modal-close:hover {
+		color: var(--color-gray-700);
+	}
+
+	/* ========================================
+	   图片灯箱
+	   ======================================== */
+	:root[data-theme="dark"] .lightbox-overlay {
+		background-color: rgba(0, 0, 0, 0.95);
+	}
+
+	:root[data-theme="dark"] .lightbox-close {
+		color: var(--color-gray-500);
+	}
+
+	:root[data-theme="dark"] .lightbox-close:hover {
+		color: var(--color-gray-300);
+	}
+
+	:root[data-theme="dark"] .lightbox-caption {
+		color: var(--color-gray-400);
+	}
+</style>

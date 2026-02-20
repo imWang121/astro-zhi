@@ -1,0 +1,56 @@
+---
+import { SITE_TITLE, GITHUB_REPO, SITE_START_YEAR, SHOW_START_YEAR } from '../consts';
+
+const today = new Date();
+const currentYear = today.getFullYear();
+---
+
+<footer>
+	<div class="footer-info">
+		<span class="footer-copyright">&copy; {SHOW_START_YEAR ? `${SITE_START_YEAR}${currentYear > SITE_START_YEAR ? `-${currentYear}` : ''}` : currentYear}</span>
+		<a href={GITHUB_REPO} target="_blank" rel="noopener" class="footer-link">{SITE_TITLE}</a>
+		<span class="footer-divider">·</span>
+		<span class="footer-text">Theme zhi</span>
+		<span class="footer-text">by <a href="https://github.com/imWang121" target="_blank" rel="noopener" class="footer-link">小王</a></span>
+	</div>
+</footer>
+
+<style>
+	footer {
+		max-width: 700px;
+		margin: 2rem auto 4rem auto;
+		padding: 2rem 1rem;
+		text-align: left;
+	}
+
+	.footer-info {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		font-family: var(--font-serif);
+		font-size: 0.75rem;
+		color: var(--color-gray-400);
+	}
+
+	.footer-divider {
+		color: var(--color-gray-300);
+	}
+
+	.footer-link {
+		color: var(--color-gray-400);
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	.footer-link:hover {
+		color: var(--color-gray-600);
+	}
+
+	@media (max-width: 640px) {
+		footer {
+			padding: 2rem 1.5rem;
+			margin-bottom: 2rem;
+		}
+	}
+</style>

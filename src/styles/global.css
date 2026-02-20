@@ -1,0 +1,153 @@
+/*字体定义*/
+@import 'remixicon/fonts/remixicon.css';
+@font-face {
+	font-family: "EarlySummer";
+	src: url("/fonts/EarlySummer-VF-Split/EarlySummer-VF-Subset.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "NotoSansSC";
+	src: url("/fonts/NotoSansSC-Regular.otf") format("opentype");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "NotoSansSC";
+	src: url("/fonts/NotoSansSC-Bold.otf") format("opentype");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "STIX";
+	src: url("/fonts/STIX-VF.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "STIX";
+	src: url("/fonts/STIX-Italic-VF.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Snell";
+	src: url("/fonts/Snell-Black-SF.woff2") format("woff2");
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Snell";
+	src: url("/fonts/Snell-Bold-SF.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+/*字体定义结束*/
+
+/*CSS 变量- 定义颜色、字体变量*/
+:root {
+	--color-white: #ffffff;
+	--color-gray-50: #f9fafb;
+	--color-gray-100: #f3f4f6;
+	--color-gray-200: #e5e7eb;
+	--color-gray-300: #d1d5db;
+	--color-gray-400: #9ca3af;
+	--color-gray-500: #6b7280;
+	--color-gray-600: #4b5563;
+	--color-gray-700: #374151;
+	--color-gray-800: #1f2937;
+	--color-gray-900: #111827;
+	--color-black: #000000;
+	
+	--font-serif: "STIX", "EarlySummer", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+	--font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/*CSS 变量结束*/
+/*基础样式 - 盒模型重置、默认字体、颜色、行高、最大宽度 700px，居中链接样式开始*/
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: var(--font-sans);
+	color: var(--color-gray-800);
+	background-color: var(--color-white);
+	line-height: 1.6;
+}
+
+main {
+	max-width: 700px;
+	margin: 0 auto;
+	padding: 0 1rem;
+}
+
+a {
+	color: var(--color-gray-700);
+	text-decoration: none;
+}
+
+a:hover {
+	color: var(--color-gray-900);
+}
+
+/*基础样式结束*/
+/*选中样式- 文字选中背景灰色，文字红色*/
+
+::selection {
+	background-color: var(--color-gray-200);
+	color: #d32f2f;
+}
+
+::-moz-selection {
+	background-color: var(--color-gray-200);
+	color: #d32f2f;
+}
+
+/*选中样式结束*/
+/*滚动条样式- 自定义滚动条宽度、颜色、圆角*/
+
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--color-gray-50);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--color-gray-300);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--color-gray-400);
+}
+
+::-webkit-scrollbar-corner {
+	background: var(--color-gray-50);
+}
+
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--color-gray-300) var(--color-gray-50);
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+}
+/*/*滚动条样式结束*/

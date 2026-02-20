@@ -1,0 +1,34 @@
+name: Welcome New Contributors
+
+on:
+  pull_request:
+    types: [opened]
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Welcome new contributor
+        uses: actions/first-interaction@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-message: |
+            👋 感谢你提交 Issue！我们会尽快查看并回复。
+
+            在等待期间，请确保：
+            - 提供了清晰的描述和复现步骤
+            - 检查是否已有类似的 Issue
+
+          pr-message: |
+            🎉 感谢你的第一个 Pull Request！我们很感激你的贡献。
+
+            请确保：
+            - PR 描述清晰说明了改动内容
+            - 通过了所有 CI 检查
+            - 遵循项目的代码规范

@@ -1,0 +1,116 @@
+---
+/**
+ * Archive page
+ * Displays tags and all blog posts with timeline design
+ */
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import ArchiveStyles from '../styles/ArchiveStyles.astro';
+import ScrollReveal from '../styles/ScrollReveal.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+
+const posts = (await getCollection('blog'))
+	.filter((post) => !post.data.draft && post.data.archive !== false)
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const totalPosts = posts.length;
+
+const allTags = posts.flatMap((post) => post.data.tags || []);
+const tagCounts = allTags.reduce((acc, tag) => {
+	acc[tag] = (acc[tag] || 0) + 1;
+	return acc;
+}, {} as Record<string, number>);
+
+const sortedTags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]);
+
+const postsByYear = posts.reduce((acc, post) => {
+	const year = post.data.date.getFullYear();
+	if (!acc[year]) {
+		acc[year] = [];
+	}
+	acc[year].push(post);
+	return acc;
+}, {} as Record<number, typeof posts>);
+
+const years = Object.keys(postsByYear).map(Number).sort((a, b) => b - a);
+const currentYear = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`归档 | ${SITE_TITLE}`} description="文章归档" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="archive-container">
+				<header class="archive-header scroll-reveal">
+					<span class="archive-label">Archive</span>
+					<h1 class="archive-title">归档</h1>
+					<p class="archive-stats">{totalPosts} 篇文章</p>
+				</header>
+
+				{sortedTags.length > 0 && (
+					<section class="archive-tags scroll-reveal" data-delay="1">
+						{sortedTags.map(([tag, count]) => (
+							<span class="tag-chip">
+								{tag}
+								<sup class="tag-sup">{count}</sup>
+							</span>
+						))}
+					</section>
+				)}
+
+				<section class="archive-timeline scroll-reveal" data-delay="2">
+					{years.map((year) => (
+						<div class={`timeline-year${year !== currentYear ? ' collapsed' : ''}`} data-year={year}>
+							<button class="year-marker" aria-expanded={year === currentYear ? 'true' : 'false'}>
+								<span class="year-toggle">
+									<svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+										<path d="M2.5 3.75L5 6.25L7.5 3.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+								</span>
+								<span class="year-label">{year}</span>
+								<span class="year-bar"></span>
+								<span class="year-count">{postsByYear[year].length}</span>
+							</button>
+							<div class="year-entries">
+								{postsByYear[year].map((post) => (
+									<a href={`/blog/${post.data.abbrlink || post.id}/`} class="entry">
+										<span class="entry-date">
+											{post.data.date.toLocaleDateString('zh-CN', {
+												month: '2-digit',
+												day: '2-digit'
+											}).replace('/', '.')}
+										</span>
+										<span class="entry-title">{post.data.title}</span>
+										{post.data.badge && (
+											<span class="entry-badge">{post.data.badge}</span>
+										)}
+									</a>
+								))}
+							</div>
+						</div>
+					))}
+				</section>
+			</div>
+		</main>
+		<Footer />
+		<ArchiveStyles />
+		<ScrollReveal />
+		<script>
+			document.querySelectorAll('.year-marker').forEach(marker => {
+				marker.addEventListener('click', () => {
+					const year = marker.closest('.timeline-year');
+					const isExpanded = marker.getAttribute('aria-expanded') === 'true';
+					
+					marker.setAttribute('aria-expanded', (!isExpanded).toString());
+					year?.classList.toggle('collapsed', isExpanded);
+				});
+			});
+		</script>
+	</body>
+</html>

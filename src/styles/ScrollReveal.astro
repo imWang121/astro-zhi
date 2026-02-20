@@ -1,0 +1,73 @@
+<style is:global>
+	/* 滚动渐显动画基础样式 */
+	.scroll-reveal {
+		opacity: 0;
+		transform: translateY(30px);
+		transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+	}
+
+	.scroll-reveal.revealed {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	/* 不同延迟时间 */
+	.scroll-reveal[data-delay="1"] {
+		transition-delay: 0.1s;
+	}
+
+	.scroll-reveal[data-delay="2"] {
+		transition-delay: 0.2s;
+	}
+
+	.scroll-reveal[data-delay="3"] {
+		transition-delay: 0.3s;
+	}
+
+	.scroll-reveal[data-delay="4"] {
+		transition-delay: 0.4s;
+	}
+
+	/* 减少动画偏好 */
+	@media (prefers-reduced-motion: reduce) {
+		.scroll-reveal {
+			opacity: 1;
+			transform: none;
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	const initScrollReveal = () => {
+		const observerOptions = {
+			root: null,
+			rootMargin: '0px 0px -50px 0px',
+			threshold: 0.1
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('revealed');
+					observer.unobserve(entry.target);
+				}
+			});
+		}, observerOptions);
+
+		document.querySelectorAll('.scroll-reveal').forEach((el) => {
+			const rect = el.getBoundingClientRect();
+			if (rect.top < window.innerHeight && rect.bottom > 0) {
+				el.classList.add('revealed');
+			} else {
+				observer.observe(el);
+			}
+		});
+	};
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initScrollReveal);
+	} else {
+		initScrollReveal();
+	}
+</script>

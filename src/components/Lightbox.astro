@@ -1,0 +1,302 @@
+---
+const { images = [] } = Astro.props;
+---
+
+<div class="lightbox-container">
+	{Array.from({ length: images.length }, (_, i) => {
+		const image = images[i];
+		return (
+			<div 
+				class="lightbox-item"
+				data-index={i}
+			>
+				<img src={image.src} alt={image.alt} />
+				{image.caption && (
+					<div class="lightbox-caption">{image.caption}</div>
+				)}
+			</div>
+		);
+	})}
+</div>
+
+<script is:inline define:vars={{ images }}>
+	let lightboxModal = null;
+	let currentIndex = 0;
+	const imageList = images;
+
+	document.addEventListener('DOMContentLoaded', function() {
+		const lightboxItems = document.querySelectorAll('.lightbox-item');
+
+		lightboxItems.forEach(item => {
+			item.addEventListener('click', function() {
+				const index = parseInt(this.getAttribute('data-index') || '0');
+				openLightbox(index);
+			});
+		});
+	});
+
+	function openLightbox(index) {
+		currentIndex = index;
+		createModal();
+		document.body.style.overflow = 'hidden';
+	}
+
+	function closeLightbox() {
+		if (lightboxModal) {
+			lightboxModal.remove();
+			lightboxModal = null;
+		}
+		document.body.style.overflow = 'auto';
+	}
+
+	function nextImage() {
+		currentIndex = (currentIndex + 1) % imageList.length;
+		updateImage();
+	}
+
+	function prevImage() {
+		currentIndex = (currentIndex - 1 + imageList.length) % imageList.length;
+		updateImage();
+	}
+
+	function createModal() {
+		if (lightboxModal) return;
+
+		lightboxModal = document.createElement('div');
+		lightboxModal.className = 'lightbox-modal';
+		lightboxModal.onclick = closeLightbox;
+
+		const content = document.createElement('div');
+		content.className = 'lightbox-content';
+		content.onclick = function(e) { e.stopPropagation(); };
+
+		const prevBtn = document.createElement('button');
+		prevBtn.className = 'lightbox-nav lightbox-prev';
+		prevBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>';
+		prevBtn.onclick = function(e) { e.stopPropagation(); prevImage(); };
+
+		const nextBtn = document.createElement('button');
+		nextBtn.className = 'lightbox-nav lightbox-next';
+		nextBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>';
+		nextBtn.onclick = function(e) { e.stopPropagation(); nextImage(); };
+
+		const imgContainer = document.createElement('div');
+		imgContainer.className = 'lightbox-image-container';
+
+		const img = document.createElement('img');
+		img.src = imageList[currentIndex].src;
+		img.alt = imageList[currentIndex].alt;
+		imgContainer.appendChild(img);
+
+		const caption = document.createElement('div');
+		caption.className = 'lightbox-modal-caption';
+		caption.textContent = imageList[currentIndex].caption || '';
+
+		const counter = document.createElement('div');
+		counter.className = 'lightbox-counter';
+		counter.textContent = (currentIndex + 1) + ' / ' + imageList.length;
+
+		content.appendChild(imgContainer);
+		content.appendChild(caption);
+		lightboxModal.appendChild(prevBtn);
+		lightboxModal.appendChild(nextBtn);
+		lightboxModal.appendChild(content);
+		lightboxModal.appendChild(counter);
+
+		document.body.appendChild(lightboxModal);
+	}
+
+	function updateImage() {
+		if (!lightboxModal) return;
+
+		const img = lightboxModal.querySelector('.lightbox-image-container img');
+		const caption = lightboxModal.querySelector('.lightbox-modal-caption');
+		const counter = lightboxModal.querySelector('.lightbox-counter');
+
+		if (img) {
+			img.src = imageList[currentIndex].src;
+			img.alt = imageList[currentIndex].alt;
+		}
+
+		if (caption) {
+			caption.textContent = imageList[currentIndex].caption || '';
+		}
+
+		if (counter) {
+			counter.textContent = (currentIndex + 1) + ' / ' + imageList.length;
+		}
+	}
+
+	document.addEventListener('keydown', function(e) {
+		if (!lightboxModal) return;
+
+		switch (e.key) {
+			case 'Escape':
+				closeLightbox();
+				break;
+			case 'ArrowRight':
+				nextImage();
+				break;
+			case 'ArrowLeft':
+				prevImage();
+				break;
+		}
+	});
+</script>
+
+<style>
+	.lightbox-container {
+		position: relative;
+	}
+
+	.lightbox-item {
+		position: relative;
+		cursor: zoom-in;
+		overflow: hidden;
+		display: block;
+		width: fit-content;
+		max-width: 100%;
+	}
+
+	.lightbox-item img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	.lightbox-caption {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: rgba(0, 0, 0, 0.7);
+		color: white;
+		padding: 0.5rem;
+		font-size: 0.9rem;
+		text-align: center;
+	}
+
+	.lightbox-modal {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(255, 255, 255, 0.95);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 1000;
+		animation: fadeIn 0.2s ease;
+		cursor: zoom-out;
+	}
+
+	.lightbox-content {
+		position: relative;
+		max-width: 85vw;
+		max-height: 85vh;
+		cursor: default;
+	}
+
+	.lightbox-image-container {
+		max-width: 100%;
+		max-height: 75vh;
+		overflow: hidden;
+		border-radius: 8px;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+	}
+
+	.lightbox-image-container img {
+		width: auto;
+		height: auto;
+		max-width: 85vw;
+		max-height: 75vh;
+		display: block;
+	}
+
+	.lightbox-nav {
+		position: fixed;
+		top: 50%;
+		transform: translateY(-50%);
+		background: var(--color-white);
+		border: 1px solid var(--color-gray-200);
+		color: var(--color-gray-700);
+		font-size: 1.25rem;
+		cursor: pointer;
+		width: 48px;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		transition: all 0.2s ease;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	}
+
+	.lightbox-nav:hover {
+		background: var(--color-gray-50);
+		border-color: var(--color-gray-300);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+	}
+
+	.lightbox-prev {
+		left: 2rem;
+	}
+
+	.lightbox-next {
+		right: 2rem;
+	}
+
+	.lightbox-modal-caption {
+		color: var(--color-gray-600);
+		text-align: center;
+		margin-top: 1rem;
+		font-size: 0.875rem;
+		font-family: var(--font-serif);
+	}
+
+	.lightbox-counter {
+		position: fixed;
+		bottom: 2rem;
+		left: 50%;
+		transform: translateX(-50%);
+		color: var(--color-gray-500);
+		text-align: center;
+		font-size: 0.75rem;
+		font-family: var(--font-sans-serif);
+		letter-spacing: 0.05em;
+		background: var(--color-white);
+		padding: 0.5rem 1rem;
+		border-radius: 20px;
+		border: 1px solid var(--color-gray-200);
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.lightbox-nav {
+			width: 40px;
+			height: 40px;
+			font-size: 1rem;
+		}
+
+		.lightbox-prev {
+			left: 1rem;
+		}
+
+		.lightbox-next {
+			right: 1rem;
+		}
+
+		.lightbox-counter {
+			bottom: 1rem;
+		}
+	}
+</style>

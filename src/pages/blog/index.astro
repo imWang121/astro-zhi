@@ -1,0 +1,102 @@
+---
+/**
+ * Blog list page
+ * Displays all blog posts with metadata
+ */
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import BlogStyles from '../../styles/BlogStyles.astro';
+import ScrollReveal from '../../styles/ScrollReveal.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE } from '../../consts';
+
+const posts = (await getCollection('blog'))
+	.filter((post) => !post.data.draft)
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const totalPosts = posts.length;
+const currentYear = new Date().getFullYear();
+const postsThisYear = posts.filter(
+	(post) => post.data.date.getFullYear() === currentYear
+).length;
+
+const postsByYear = posts.reduce((acc, post) => {
+	const year = post.data.date.getFullYear();
+	if (!acc[year]) {
+		acc[year] = [];
+	}
+	acc[year].push(post);
+	return acc;
+}, {} as Record<number, typeof posts>);
+
+const years = Object.keys(postsByYear).map(Number).sort((a, b) => b - a);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Blog | ${SITE_TITLE}`} description="Blog posts" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="blog-container">
+				<div class="blog-header scroll-reveal">
+					<h1 class="blog-title">Blog</h1>
+					<p class="blog-subtitle">Thoughts, ideas, and stories</p>
+				</div>
+
+				<div class="blog-stats scroll-reveal" data-delay="1">
+					<div class="blog-stat">
+						<i class="ri-article-line blog-stat-icon"></i>
+						<span class="blog-stat-value">{totalPosts} posts</span>
+					</div>
+					<div class="blog-stat">
+						<i class="ri-calendar-line blog-stat-icon"></i>
+						<span class="blog-stat-value">{postsThisYear} this year</span>
+					</div>
+				</div>
+
+				{posts.length > 0 ? (
+					<div class="blog-list scroll-reveal" data-delay="2">
+						{years.map((year) => (
+							<div class="blog-year-group">
+								<h2 class="blog-year-title">{year}</h2>
+								<div class="blog-year-posts">
+									{postsByYear[year].map((post) => (
+										<a href={`/blog/${post.data.abbrlink || post.id}/`} class="blog-item">
+											<div class="blog-item-header">
+												<time class="blog-item-date">
+													{post.data.date.toLocaleDateString('en-US', {
+														month: 'short',
+														day: 'numeric'
+													})}
+												</time>
+												<h3 class="blog-item-title">{post.data.title}</h3>
+												{post.data.badge && (
+													<span class="blog-item-badge">{post.data.badge}</span>
+												)}
+											</div>
+											{post.data.description && (
+												<p class="blog-item-desc">{post.data.description}</p>
+											)}
+										</a>
+									))}
+								</div>
+							</div>
+						))}
+					</div>
+				) : (
+					<div class="blog-empty">
+						<i class="ri-file-text-line blog-empty-icon"></i>
+						<p class="blog-empty-text">No posts yet</p>
+					</div>
+				)}
+			</div>
+		</main>
+		<Footer />
+		<BlogStyles />
+		<ScrollReveal />
+	</body>
+</html>

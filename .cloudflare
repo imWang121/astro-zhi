@@ -1,0 +1,7 @@
+# Cloudflare Pages 配置
+# 在 Cloudflare Dashboard 中设置:
+# Build command: npm run build
+# Build output directory: dist
+# Node.js version: 18 (在 Environment variables 中设置 NODE_VERSION=18)
+
+# Headers 配置通过 _headers 文件实现

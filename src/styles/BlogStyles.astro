@@ -1,0 +1,244 @@
+<style is:global>
+	/* ========================================
+	   文章列表页样式
+	   ======================================== */
+
+	main {
+		display: flex;
+		flex-direction: column;
+		padding: 0 1rem;
+	}
+
+	@media (max-width: 768px) {
+		main {
+			padding: 0 1.5rem;
+		}
+	}
+
+	.blog-container {
+		max-width: 800px;
+		width: 100%;
+		margin: 0 auto;
+		padding-top: 2rem;
+		padding-bottom: 4rem;
+	}
+
+	/* ========================================
+	   页面标题
+	   ======================================== */
+	.blog-header {
+		margin-bottom: 2rem;
+	}
+
+	.blog-title {
+		font-family: var(--font-sans-serif);
+		font-size: 0.75rem;
+		font-weight: 500;
+		color: var(--color-gray-400);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		margin: 0 0 0.25rem 0;
+	}
+
+	.blog-subtitle {
+		font-family: var(--font-serif);
+		font-size: 1.15rem;
+		font-weight: 500;
+		color: var(--color-black);
+		margin: 0;
+		line-height: 1.4;
+	}
+
+	/* ========================================
+	   文章统计
+	   ======================================== */
+	.blog-stats {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+		margin-bottom: 2rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid var(--color-gray-200);
+	}
+
+	.blog-stat {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.blog-stat-icon {
+		font-size: 1rem;
+		color: var(--color-gray-400);
+	}
+
+	.blog-stat-value {
+		font-family: var(--font-sans-serif);
+		font-size: 0.75rem;
+		color: var(--color-gray-500);
+	}
+
+	/* ========================================
+	   文章列表
+	   ======================================== */
+	.blog-list {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.blog-year-group {
+		margin-bottom: 2.5rem;
+	}
+
+	.blog-year-group:last-child {
+		margin-bottom: 0;
+	}
+
+	.blog-year-title {
+		font-family: var(--font-sans-serif);
+		font-size: 0.75rem;
+		font-weight: 500;
+		color: var(--color-gray-400);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		margin: 0 0 1.25rem 0;
+	}
+
+	.blog-year-posts {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.blog-item {
+		display: block;
+		padding: 0.875rem 0;
+		border-bottom: 1px solid var(--color-gray-100);
+		text-decoration: none;
+		transition: opacity 0.2s ease;
+	}
+
+	.blog-item:last-child {
+		border-bottom: none;
+	}
+
+	.blog-item:hover {
+		opacity: 0.7;
+	}
+
+	.blog-item-header {
+		display: flex;
+		align-items: baseline;
+		gap: 1rem;
+	}
+
+	.blog-item-badge {
+		font-family: var(--font-sans-serif);
+		font-size: 0.6875rem;
+		font-weight: 500;
+		color: var(--color-gray-500);
+		background: var(--color-gray-100);
+		padding: 0.125rem 0.5rem;
+		border-radius: 4px;
+		flex-shrink: 0;
+	}
+
+	.blog-item-date {
+		font-family: var(--font-sans-serif);
+		font-size: 0.75rem;
+		color: var(--color-gray-400);
+		flex-shrink: 0;
+		min-width: 4.5rem;
+	}
+
+	.blog-item-title {
+		font-family: var(--font-serif);
+		font-size: 0.9375rem;
+		font-weight: 500;
+		color: var(--color-black);
+		margin: 0;
+		line-height: 1.4;
+	}
+
+	.blog-item-desc {
+		font-family: var(--font-serif);
+		font-size: 0.8125rem;
+		color: var(--color-gray-500);
+		margin: 0.25rem 0 0 5.5rem;
+		line-height: 1.6;
+	}
+
+	/* ========================================
+	   响应式设计
+	   ======================================== */
+	@media (max-width: 640px) {
+		.blog-container {
+			padding-top: 1.5rem;
+		}
+
+		.blog-header {
+			margin-bottom: 1.5rem;
+		}
+
+		.blog-title {
+			font-size: 0.6875rem;
+		}
+
+		.blog-subtitle {
+			font-size: 1.125rem;
+		}
+
+		.blog-stats {
+			gap: 1rem;
+			margin-bottom: 1.5rem;
+			padding-bottom: 1rem;
+		}
+
+		.blog-year-title {
+			font-size: 0.6875rem;
+		}
+
+		.blog-item {
+			padding: 0.75rem 0;
+		}
+
+		.blog-item-header {
+			flex-direction: column;
+			gap: 0.25rem;
+		}
+
+		.blog-item-date {
+			min-width: auto;
+			font-size: 0.6875rem;
+		}
+
+		.blog-item-title {
+			font-size: 0.875rem;
+		}
+
+		.blog-item-desc {
+			margin-left: 0;
+			font-size: 0.75rem;
+		}
+	}
+
+	/* ========================================
+	   空状态
+	   ======================================== */
+	.blog-empty {
+		text-align: center;
+		padding: 4rem 0;
+	}
+
+	.blog-empty-icon {
+		font-size: 3rem;
+		color: var(--color-gray-300);
+		margin-bottom: 1rem;
+	}
+
+	.blog-empty-text {
+		font-family: var(--font-serif);
+		font-size: 0.9375rem;
+		color: var(--color-gray-400);
+		margin: 0;
+	}
+</style>
